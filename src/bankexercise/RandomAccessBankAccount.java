@@ -47,12 +47,12 @@ public class RandomAccessBankAccount extends BankAccount {
 	}
 	
 	private void writeName(RandomAccessFile file, String name) throws IOException{
-		StringBuffer buffer = null;
+		StringBuilder  buffer = null;
 		
 		if(name!=null)
-			buffer = new StringBuffer(name);
+			buffer = new StringBuilder(name);
 		else
-			buffer = new StringBuffer(15);
+			buffer = new StringBuilder(15);
 		
 		buffer.setLength(15);
 		file.writeChars(buffer.toString());

@@ -34,10 +34,10 @@ import net.miginfocom.swing.MigLayout;
 
 public class BankApplication extends JFrame {
 	
-	ArrayList<BankAccount> accountList = new ArrayList<BankAccount>();
-	static HashMap<Integer, BankAccount> table = new HashMap<Integer, BankAccount>();
-	private final static int TABLE_SIZE = 29;
-	static private final String newline = "\n";
+	ArrayList<BankAccount> accountList = new ArrayList<>();
+	static HashMap<Integer, BankAccount> table = new HashMap<>();
+	private static final int TABLE_SIZE = 29;
+	private static final String newline = "\n";
 	
 	JMenuBar menuBar;
 	JMenu navigateMenu, recordsMenu, transactionsMenu, fileMenu, exitMenu;
