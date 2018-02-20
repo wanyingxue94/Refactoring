@@ -121,7 +121,7 @@ public class CreateBankDialog extends JFrame {
 		add(buttonPanel, BorderLayout.SOUTH);
 
 		// add action for addButton and canelButton
-		addActions(cancelButton, cancelButton);
+		addActions(addButton, cancelButton);
 
 		setSize(400, 800);
 		pack();
