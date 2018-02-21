@@ -19,6 +19,7 @@ public class FileHelper {
     private RandomAccessFile input;
     private RandomAccessFile output;
     private String fileToSaveAs;
+    private static final long RECORD_LENGTH = 140;
 
     FileHelper(RandomAccessFile input, RandomAccessFile output, String fileToSaveAs) {
 	this.input = input;
@@ -146,42 +147,32 @@ public class FileHelper {
     } // end method openFile
 
     private void readRecords(HashMap<Integer, BankAccount> table) {
-
+	
 	RandomAccessBankAccount record = new RandomAccessBankAccount();
-
-	try // read a record and display
-	{
-	    while (true) {
-		do {
-		    if (input != null)
+	
+	if (input != null) {
+	    try {
+		long fileLength = input.length();
+		if (fileLength > 0 && fileLength % RECORD_LENGTH == 0) {
+		    for (int i = 0; i < fileLength / RECORD_LENGTH; i++) {
 			record.read(input);
-		} while (record.getAccountID() == 0);
-
-		BankAccount ba = new BankAccount(record.getAccountID(), record.getAccountNumber(),
-			record.getFirstName(), record.getSurname(), record.getAccountType(), record.getBalance(),
-			record.getOverdraft());
-
-		Integer key = Integer.valueOf(ba.getAccountNumber().trim());
-
-		int hash = (key % TABLE_SIZE);
-
-		while (table.containsKey(hash)) {
-
-		    hash = hash + 1;
+			BankAccount ba = new BankAccount(record.getAccountID(), record.getAccountNumber(),
+				record.getFirstName(), record.getSurname(), record.getAccountType(),
+				record.getBalance(), record.getOverdraft());
+			Integer key = Integer.valueOf(ba.getAccountNumber().trim());
+			int hash = (key % TABLE_SIZE);
+			while (table.containsKey(hash)) {
+			    hash = hash + 1;
+			}
+			table.put(hash, ba);
+		    }
 		}
+	    } catch (IOException ioException) {
+		JOptionPane.showMessageDialog(null, "Error reading file.");
+		System.exit(1);
+	    }
+	}
 
-		table.put(hash, ba);
-
-	    } // end while
-	} // end try
-	catch (EOFException eofException) // close file
-	{
-	    return; // end of file was reached
-	} // end catch
-	catch (IOException ioException) {
-	    JOptionPane.showMessageDialog(null, "Error reading file.");
-	    System.exit(1);
-	} // end catch
     }
 
 }
