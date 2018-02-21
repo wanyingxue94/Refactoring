@@ -11,7 +11,7 @@ public class BankAccount {
 	private double balance;
 	private double overdraft;
 	
-	public static final int count = 0;
+	public static final int COUNT = 0;
 	
 	public BankAccount(int accountID, String accountNumber, String surname, String firstName, String accountType, double balance, double overdraft){
 		this.accountID = accountID;
