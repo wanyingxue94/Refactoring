@@ -243,11 +243,9 @@ public class BankApplication extends JFrame {
 		if (answer == JOptionPane.YES_OPTION) {
 		    fileHelper.saveFileAs(table,fc);
 		    dispose();
-		} else if (answer == JOptionPane.NO_OPTION)
+		} else if (answer == JOptionPane.NO_OPTION) {
 		    dispose();
-		else if (answer == 0)
-		    ;
-
+		}
 	    }
 	});
 
