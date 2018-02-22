@@ -500,10 +500,17 @@ public class BankApplication extends JFrame {
 	    public void actionPerformed(ActionEvent e) {
 		saveOpenValues();
 		currentItem = 0;
+		if(table != null && table.size() > 0)
+		{
 		while (!table.containsKey(currentItem)) {
 		    currentItem++;
 		}
 		displayDetails(currentItem);
+		}
+		else
+		{
+		    JOptionPane.showMessageDialog(null, "Nothing To Display!");
+		}
 	    }
 	};
 
@@ -543,6 +550,7 @@ public class BankApplication extends JFrame {
 		    while (!table.containsKey(currentItem)) {
 			currentItem--;
 		    }
+
 		}
 		displayDetails(currentItem);
 	    }
@@ -552,11 +560,18 @@ public class BankApplication extends JFrame {
 	    public void actionPerformed(ActionEvent e) {
 		saveOpenValues();
 		currentItem = 29;
+		if(table != null && table.size() > 0)
+		{
 		while (!table.containsKey(currentItem)) {
 		    currentItem--;
 
 		}
 		displayDetails(currentItem);
+		}
+		else
+		{
+		    JOptionPane.showMessageDialog(null, "Nothing To Display!");
+		}
 	    }
 	};
 
