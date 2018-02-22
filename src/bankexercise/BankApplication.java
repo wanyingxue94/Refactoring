@@ -428,13 +428,27 @@ public class BankApplication extends JFrame {
 
 	save.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
-		fileHelper.writeFile(table,fc);
+		if(table != null && table.size() > 0)
+		{
+		    fileHelper.writeFile(table,fc);
+		}
+		else
+		{
+		    JOptionPane.showMessageDialog(null, "Can not save empty content!");
+		}
 	    }
 	});
 
 	saveAs.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
-		fileHelper.saveFileAs(table,fc);
+		if(table != null && table.size() > 0)
+		{
+		    fileHelper.saveFileAs(table,fc);
+		}
+		else
+		{
+		    JOptionPane.showMessageDialog(null, "Can not save empty content!");
+		}
 	    }
 	});
     }
