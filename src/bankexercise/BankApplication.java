@@ -10,8 +10,10 @@ import java.io.File;
 
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -141,6 +143,7 @@ public class BankApplication extends JFrame {
 	menuBar = new JMenuBar();
 	setJMenuBar(menuBar);
 
+	//-----Navigate Menu Start-------
 	navigateMenu = new JMenu("Navigate");
 
 	nextItem = new JMenuItem("Next Item");
@@ -151,16 +154,13 @@ public class BankApplication extends JFrame {
 	findBySurname = new JMenuItem("Find by Surname");
 	listAll = new JMenuItem("List All Records");
 
-	navigateMenu.add(nextItem);
-	navigateMenu.add(prevItem);
-	navigateMenu.add(firstItem);
-	navigateMenu.add(lastItem);
-	navigateMenu.add(findByAccount);
-	navigateMenu.add(findBySurname);
-	navigateMenu.add(listAll);
-
+	List<JMenuItem> navigateMenuItems =Arrays.asList(nextItem, prevItem, firstItem, lastItem, findByAccount, findBySurname, listAll);
+	createMenu(navigateMenu, navigateMenuItems);
 	menuBar.add(navigateMenu);
+	//-----Navigate Menu End-------
 
+
+	//-----Records Menu Start-------
 	recordsMenu = new JMenu("Records");
 
 	createItem = new JMenuItem("Create Item");
@@ -169,37 +169,36 @@ public class BankApplication extends JFrame {
 	setOverdraft = new JMenuItem("Set Overdraft");
 	setInterest = new JMenuItem("Set Interest");
 
-	recordsMenu.add(createItem);
-	recordsMenu.add(modifyItem);
-	recordsMenu.add(deleteItem);
-	recordsMenu.add(setOverdraft);
-	recordsMenu.add(setInterest);
-
+	List<JMenuItem> recordsMenuItems =Arrays.asList(createItem, modifyItem, deleteItem, setOverdraft, setInterest);
+	createMenu(recordsMenu, recordsMenuItems);
 	menuBar.add(recordsMenu);
+	//-----Records Menu End-------
 
+
+	//-----Transactions Menu Start-----
 	transactionsMenu = new JMenu("Transactions");
 
 	deposit = new JMenuItem("Deposit");
 	withdraw = new JMenuItem("Withdraw");
 	calcInterest = new JMenuItem("Calculate Interest");
-
-	transactionsMenu.add(deposit);
-	transactionsMenu.add(withdraw);
-	transactionsMenu.add(calcInterest);
+	List<JMenuItem> transactionsMenuItems =Arrays.asList(deposit, withdraw, calcInterest);
+	createMenu(transactionsMenu, transactionsMenuItems);
 
 	menuBar.add(transactionsMenu);
+	//-----Transactions Menu End-----
 
+
+	//-----File Menu Start-------
 	fileMenu = new JMenu("File");
 
 	open = new JMenuItem("Open File");
 	save = new JMenuItem("Save File");
 	saveAs = new JMenuItem("Save As");
-
-	fileMenu.add(open);
-	fileMenu.add(save);
-	fileMenu.add(saveAs);
+	List<JMenuItem> fileMenuItems =Arrays.asList(open, save, saveAs); 
+	createMenu(fileMenu, fileMenuItems);
 
 	menuBar.add(fileMenu);
+	//-----File Menu End-------
 
 	exitMenu = new JMenu("Exit");
 
@@ -619,7 +618,14 @@ public class BankApplication extends JFrame {
 	lastItemButton.addActionListener(last);
 	lastItem.addActionListener(last);
     }
+    
+    private void createMenu(JMenu menu, List<JMenuItem> items) {
+	for (JMenuItem item : items) {
+	    menu.add(item);
+	}
+    }
 
+    
     public static void main(String[] args) {
 	BankApplication ba = new BankApplication();
 	ba.setSize(1200, 400);
